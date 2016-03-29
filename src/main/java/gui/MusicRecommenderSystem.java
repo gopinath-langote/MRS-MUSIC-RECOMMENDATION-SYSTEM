@@ -10,6 +10,8 @@ import java.io.File;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import com.sun.codemodel.internal.JOp;
+import constant.Paths;
 import prerequisite.Normalizer;
 import prerequisite.Parser;
 import ai.MusicRecommender;
@@ -25,15 +27,13 @@ public class MusicRecommenderSystem implements ActionListener {
     JTextField[] value;
     JButton bsubmit, breset;
 
-    public void blxAlphaCrossovar(String[] a, String[] b) {
-    }
 
     public MusicRecommenderSystem() throws Exception {
         Parser p = new Parser();
-        String inDirectory = "C:\\Users\\ILMISS\\IdeaProjects\\myapp\\MRS PROJECT\\src\\database\\xml";
+        String inDirectory = Paths.XML;
         p.parse(inDirectory);
         Normalizer n = new Normalizer();
-        String outDirectory = "C:\\Users\\ILMISS\\IdeaProjects\\myapp\\MRS PROJECT\\src\\database\\normalized";
+        String outDirectory = Paths.NORMALIZED;
         n.normalize(inDirectory, outDirectory);
 
         f = new JFrame("Music Recommended");
@@ -60,7 +60,7 @@ public class MusicRecommenderSystem implements ActionListener {
         bpause = new JButton[10];
         rate = new JSlider[10];
         value = new JTextField[10];
-        File directory = new File("C:\\Users\\ILMISS\\IdeaProjects\\myapp\\MRS PROJECT\\src\\database\\normalized");
+        File directory = new File(Paths.NORMALIZED);
         File[] fList = directory.listFiles();
         for (int i = 0; i < 10; i++) {
             index[i] = new JLabel("" + (i + 1));
@@ -150,7 +150,7 @@ public class MusicRecommenderSystem implements ActionListener {
         LinkedList ll = new LinkedList();
         LinkedList ll1 = new LinkedList();
         LinkedList ll3 = new LinkedList();
-        File directory = new File("C:\\Users\\ILMISS\\IdeaProjects\\myapp\\MRS PROJECT\\src\\database\\db_text");
+        File directory = new File(Paths.DB_TEXT);
         File[] fList = directory.listFiles();
         int max = 0;
         if (b == bsubmit) {
@@ -169,14 +169,19 @@ public class MusicRecommenderSystem implements ActionListener {
                     ll1.add(i);
             }
             for (int k = 0; k < ll1.size(); k++) {
+
                 try {
 
                     new MusicRecommender((Integer) ll1.get(k));
+
                     //Collections.sort(CompData.ll2);
                     float min = (Float) Collections.min(MusicRecommender.ll2);
+
                     for (int i = 0; i < 5; i++)//here we select best 5 songs
                     {
+
                         //JOptionPane.showMessageDialog(null,""+min);
+
                         for (int j = 0; j < MusicRecommender.ll2.size(); j++) {
                             if ((Float) MusicRecommender.ll2.get(j) == min) {
                                 ll3.add(j);

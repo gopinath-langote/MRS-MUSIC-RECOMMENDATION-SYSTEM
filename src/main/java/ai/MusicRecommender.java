@@ -4,9 +4,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.LinkedList;
+
+import constant.Paths;
 import optimazation.Optimizer;
+
+import javax.swing.*;
+
 public class MusicRecommender {
-    File directory = new File("C:\\Users\\ILMISS\\IdeaProjects\\myapp\\MRS PROJECT\\src\\database\\normalized");
+    File directory = new File(Paths.NORMALIZED);
     public static LinkedList ll2=new LinkedList();
     File[] fList = directory.listFiles();
     File file1=null;
@@ -21,8 +26,11 @@ public class MusicRecommender {
 
         op=new Optimizer();
         System.out.println("index"+index); //we pass index of selected file
+
         file1=fList[index];
+        System.out.println("alo MR ");
         br=new BufferedReader(new FileReader(new File(file1.getAbsolutePath())));
+
         sendData(br);
     }
 
@@ -79,7 +87,7 @@ public class MusicRecommender {
         }
         br.close();
         i=0;
-        directory=new File("C:\\Users\\ILMISS\\IdeaProjects\\myapp\\MRS PROJECT\\src\\database\\db_text");
+        directory=new File("/Users/gopinathlangote/Desktop/mrs/MRS-MUSIC-RECOMMENDATION-SYSTEM/src/main/java/database/db_text");
         fList= directory.listFiles();
         for(j=0;j<fList.length;j++) //here we send each music file's property in our db with selected songs property to compare
         {
