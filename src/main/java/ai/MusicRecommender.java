@@ -87,7 +87,7 @@ public class MusicRecommender {
         }
         br.close();
         i=0;
-        directory=new File("/Users/gopinathlangote/Desktop/mrs/MRS-MUSIC-RECOMMENDATION-SYSTEM/src/main/java/database/db_text");
+        directory=new File(Paths.DB_TEXT);
         fList= directory.listFiles();
         for(j=0;j<fList.length;j++) //here we send each music file's property in our db with selected songs property to compare
         {
